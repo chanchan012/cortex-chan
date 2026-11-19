@@ -15,7 +15,13 @@
 - [Feature preview](https://cortex-chan-qr40cx09z-chanchans-projects-aada625f.vercel.app) · deployment `dpl_8hqFhkDSL7A5G1BafoW49Pk15E2D`
 - [GitHub](https://github.com/chanchan012/cortex-chan)
 
-Provider credentials and the Neon migration are pending. The checked-in schema is ready to migrate on a selected Neon branch. Live Clerk sign-in and distributed Upstash enforcement still need verification with credentials. The guest demo's readings are illustrative.
+The guest demo's readings are illustrative.
+
+### Provider setup — 2026-11-19
+
+- Neon project `still-bird-86777802`, branch `production`, contains the new `cortex` database. Applied `0000_nifty_prism` in a transaction and verified `public.diagrams` and one entry in `drizzle.__drizzle_migrations`. Production Vercel has `DATABASE_URL`.
+- Created a dedicated Clerk application named Cortex. Vercel Preview uses its development keys. Verified the preview sign-in route and an anonymous Hono session response. Full signed-in session verification is pending. Clerk production setup needs a verified custom domain.
+- The existing free Upstash database still needs to be connected. The Vercel connector listed the installation but did not expose a database attach action, and browser control could not open the signed-in Upstash tab. The app uses the process-local limiter.
 
 At release, `npm audit --omit=dev` returned no production advisories. The full audit reported nine development-tool findings (four moderate, five high) in the Drizzle Kit/esbuild and Vitest/picomatch dependency chains. Recheck when upgrading the lockfile.
 

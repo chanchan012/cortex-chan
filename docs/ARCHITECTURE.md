@@ -11,7 +11,7 @@ Next.js 16 App Router renders the React 19 shell. The layout mounts ClerkProvide
 | `/sign-in/[[...sign-in]]` | Clerk sign-in or guest entry |
 | `/sign-up/[[...sign-up]]` | Clerk sign-up or guest entry |
 
-Page shells allocate exactly `100dvh` to the header, main and footer. Main panels can scroll internally when content needs more room. SVG packet animation honors reduced motion. The sample topology is component-local and resets on navigation. Calculated metrics and persistent changes start in later milestones.
+Page shells allocate exactly `100dvh` to the header, main and footer. Main panels can scroll internally when content needs more room. SVG packet animation honors reduced motion. The sample topology is component-local and resets on navigation. Calculated metrics and persistent changes start in later milestones. Vercel Preview uses the Cortex Clerk development instance. The production hostname serves guest mode pending an owned custom domain and Clerk production instance.
 
 ## API boundary
 
@@ -27,7 +27,7 @@ All three routes share the limiter. Upstash enforces 60 requests per minute usin
 
 ## Persistent schema
 
-Drizzle's lazy Neon HTTP client is in `src/db/client.ts`. The SQL migration and Drizzle metadata are checked in under `drizzle/`. The foundation exposes no diagram mutations.
+Drizzle's lazy Neon HTTP client is in `src/db/client.ts`. The SQL migration and Drizzle metadata are checked in under `drizzle/`. Applied the migration to database `cortex` on the production branch of Neon project `still-bird-86777802`. The foundation exposes no diagram mutations.
 
 | diagrams column | PostgreSQL type | Contract |
 | --- | --- | --- |
@@ -43,4 +43,4 @@ The owner/update-time index supports dashboard listing. The future update path m
 
 ## Verification boundary
 
-Vitest exercises typed Hono RPC, guest handling, configured Clerk middleware without a session, an injected authenticated principal, quota boundaries and provider configuration errors. Playwright runs Chromium against a local Next.js server with empty provider keys. Live Clerk login, Neon migration and cross-instance Redis quotas require configured test services. The dashboard, simulator, Inngest, SSE and MCP are scheduled for subsequent subgoals.
+Vitest exercises typed Hono RPC, guest handling, configured Clerk middleware without a session, an injected authenticated principal, quota boundaries and provider configuration errors. Playwright runs Chromium against a local Next.js server with empty provider keys. Live checks confirmed the Neon schema and migration ledger, the preview sign-in route, and an anonymous Hono session response with Clerk middleware active. Full member sign-in and cross-instance Redis quotas still need live verification. The dashboard, simulator, Inngest, SSE and MCP are scheduled for subsequent subgoals.

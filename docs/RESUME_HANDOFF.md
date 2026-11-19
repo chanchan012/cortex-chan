@@ -21,9 +21,9 @@ Copy `.env.example` to `.env.local` for development. In Vercel, set values separ
 | UPSTASH_REDIS_REST_URL | Upstash Redis REST endpoint, HTTPS |
 | UPSTASH_REDIS_REST_TOKEN | Upstash Redis read/write REST token, server only |
 
-Configure the production domain in Clerk. Sign in and check that /api/session reports member and /api/account returns the same user ID. The production release used no provider secrets. Verify tenant-specific flows after configuration.
+Vercel Preview already has the Cortex Clerk development keys. Sign in with a test account and check that /api/session reports member and /api/account returns the same user ID. To enable production sign-in, attach an owned custom domain, verify the production instance in Clerk, and add its key pair to the Production environment.
 
-Set DATABASE_URL for the intended Neon branch and run `npm run db:migrate` once against that branch before CRUD work. This release generated the migration locally. No remote database has been migrated. With Upstash configured, exercise a test bucket through /api/session until it returns 429 and check the Retry-After header. Without Redis the limiter is shared in memory per process.
+Production already has DATABASE_URL for the migrated `cortex` database on the production branch of `still-bird-86777802`. Set DATABASE_URL separately for any development database and run `npm run db:migrate` there before CRUD work. Connect the existing free Upstash instance and set both REST variables in Vercel. After redeploying, exercise a test bucket through /api/session until it returns 429 and check the Retry-After header. Until Upstash is connected, the limiter is shared in memory per process.
 
 ## Next subgoal
 
